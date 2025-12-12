@@ -61,3 +61,7 @@ coverage.xml
 .idea/
 *.swp
 *.swo
+.DS_Store
+
+# Директории
+data/
