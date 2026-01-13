@@ -33,7 +33,7 @@ def train_sequence(model, dataloader, criterion, optimizer,
     progress_bar = tqdm(dataloader, desc="Training", leave=False)
 
     # История для графиков
-    history = {"train_loss": [], "val_rouge1": [], "val_rouge2": [], "epochs": []}
+    history = {"train_loss": [], "val_rouge1": [], "val_rouge2": [], "batch_cnt": []}
     
     for batch_idx, item in enumerate(progress_bar):
         # Перемещаем данные на устройство
@@ -84,7 +84,11 @@ def train_sequence(model, dataloader, criterion, optimizer,
 
             history['train_loss'].append(loss.item())
             history['val_rouge1'].append(avg_rouge1)
-            history['val_rouge2'].append(avg_rouge2) 
+            history['val_rouge2'].append(avg_rouge2)
+            history['batch_cnt'].append(total_batches)
+
+            torch.save(model, './models/full_model.pth') # сохранение всей модели
+            torch.save(model.state_dict(), './models/model_weights.pth') # сохранение весов
 
     
     # Усредняем метрики по всем батчам

@@ -3,8 +3,28 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 
+import urllib.request
+
 import os
 import re
+
+def download_with_urllib(url, save_path):
+    """
+    Скачивание файла с помощью стандартной библиотеки
+    """
+    try:
+        # Создаем директорию
+        os.makedirs(os.path.dirname(save_path), exist_ok=True)
+        
+        # Скачиваем файл
+        urllib.request.urlretrieve(url, save_path)
+        
+        print(f"Файл сохранен: {save_path}")
+        return True
+        
+    except Exception as e:
+        print(f"Ошибка: {e}")
+        return False
 
 # Очистка текстов
 def clean_text(text):
