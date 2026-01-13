@@ -68,6 +68,7 @@ def train_sequence(model, dataloader, criterion, optimizer,
         
         batch_size = x_batch.size(0)
         avg_rouge1, avg_rouge2 = evaluate_model(model, item, tokenizer, device)
+        model.train()
         
         total_batches += 1
         total_rouge1_f1 += avg_rouge1
